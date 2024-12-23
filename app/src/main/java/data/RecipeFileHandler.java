@@ -1,5 +1,7 @@
 package data;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class RecipeFileHandler {
         } catch (IOException e) {
             System.out.println("Error reading file:" + e.getMessage());
         }
-        return null;
+        return recipes;
     }
 
     /**
@@ -48,10 +50,11 @@ public class RecipeFileHandler {
      */
      // 
     public void addRecipe(String recipeName, String ingredients) {
-        // try {
-
-        // } catch (IOException e) {
-
-        // }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))) {
+            writer.write(recipeName + "," + ingredients);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage() );
     }
+}
 }

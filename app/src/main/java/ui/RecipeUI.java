@@ -41,7 +41,8 @@ public class RecipeUI {
                         break;
                     case "2":
                         // 設問2: 新規登録機能
-                        break;
+                        addNewRecipe();
+                        return;
                     case "3":
                         // 設問3: 検索機能
                         break;
@@ -63,26 +64,31 @@ public class RecipeUI {
      * RecipeFileHandlerから読み込んだレシピデータを整形してコンソールに表示します。
      */
     private void displayRecipes() {
-        ArrayList<String> recips = fileHandler.readRecipes();
+        ArrayList<String> recipes = fileHandler.readRecipes();
 
-        if(recips.isEmpty()){
+        if(recipes.isEmpty()){
             System.out.println("No recipes available.");
-            }else {
-                System.out.println("Recipes: ");
-            }
+            return;
+            }else 
 
-        for(String recipsNum : recips){
-            String[] food =recipsNum.split(",");
-            System.out.println("Recipe Name: " + food[0]);
-        
+            System.out.println("Recipes: ");
+            
 
-            for(int i = 1; i<food.length;i++){
-                System.out.println(food[i]);
-            }
-
+        for (String recipe : recipes) { 
+        String[] food = recipe.split(","); 
+        System.out.println("-----------------------------------"); 
+        System.out.println("Recipe Name: " + food[0]); 
+        System.out.print("Main Ingredients: "); 
+        for (int i = 1; i < food.length; i++) { 
+            System.out.print(food[i]); 
+            if (i < food.length - 1) { System.out.print(", "); 
+        } 
+        } 
+        System.out.println(); 
+        }
 
         }
-    }
+    
     
 
     /**
@@ -92,6 +98,12 @@ public class RecipeUI {
      * @throws java.io.IOException 入出力が受け付けられない
      */
     private void addNewRecipe() throws IOException {
+        System.out.print("Enter recipe name: ");
+        String recipeName= reader.readLine();
+        System.out.print("Enter main ingredients (comma separated): ");
+        String ingredients = reader.readLine();
+        fileHandler.addRecipe(recipeName, ingredients);
+        System.out.print("Recipe added successfully.");
 
     }
 
