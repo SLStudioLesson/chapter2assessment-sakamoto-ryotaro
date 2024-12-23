@@ -42,7 +42,7 @@ public class RecipeUI {
                     case "2":
                         // 設問2: 新規登録機能
                         addNewRecipe();
-                        return;
+                        break;
                     case "3":
                         // 設問3: 検索機能
                         break;
